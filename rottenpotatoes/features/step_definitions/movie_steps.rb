@@ -28,10 +28,39 @@ end
 
 When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
+  ratings = rating_list.split(", ")
   #   iterate over the ratings and reuse the "When I check..." or
+  ratings.each do |rating|
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
-  fail "Unimplemented"
+   # When /^(?:|I )check "([^"]*)"$/ do |field|
+    #  check(field)
+    #end
+    
+    #When /^(?:|I )uncheck "([^"]*)"$/ do |field|
+     # uncheck(field)
+    #end
+    uncheck ? uncheck("ratings[#{rating}]") : (check("ratings[#{rating}]"))
+  #fail "Unimplemented"
+  end
 end
+
+When /I press "(.*)" button/ do |button|
+  click_button button
+end
+
+Then /I should (not )?see the movies: (.*)/ do |present, movies_list|
+  #use sting slpit again to break up the anticipated movie list
+  movies = movies_list.split(', ')
+  # iterate over the movies and connect to web step page should have/should not have
+  movies.each do |movie|
+    if present.nil?
+      expect(page).to have_content(movie)
+    else
+      expect(page).not_to have_content(movie)
+    end
+  end
+end
+  
 
 Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
