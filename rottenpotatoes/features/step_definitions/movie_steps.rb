@@ -19,7 +19,9 @@ end
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.body is the entire content of the page as a string.
-  fail "Unimplemented"
+  #page.body.should =~/(.*)e1(.*)e2(.*)/
+  expect(/[\s\S]*#{e1}[\s\S]*#{e2}/).to match(page.body)
+  #fail "Unimplemented"
 end
 
 # Make it easier to express checking or unchecking several boxes at once
@@ -53,6 +55,7 @@ Then /I should (not )?see the movies: (.*)/ do |present, movies_list|
   movies = movies_list.split(', ')
   # iterate over the movies and connect to web step page should have/should not have
   movies.each do |movie|
+    #use capy to check developed output
     if present.nil?
       expect(page).to have_content(movie)
     else
@@ -64,7 +67,7 @@ end
 
 Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
-  #use expect to have command again, count the number of rows in the table displayed
+  #use capy expect to have command again, count the number of rows in the table displayed
   #rows = count("//tr")
   #expect(rows).to eq(11)
   expect(page).to have_xpath("//tr", count:11)
