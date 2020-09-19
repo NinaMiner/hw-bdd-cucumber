@@ -64,5 +64,9 @@ end
 
 Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
-  fail "Unimplemented"
+  #use expect to have command again, count the number of rows in the table displayed
+  #rows = count("//tr")
+  #expect(rows).to eq(11)
+  expect(page).to have_xpath("//tr", count:11)
+  #fail "Unimplemented"
 end

@@ -36,4 +36,11 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   And I should not see the movies: Chicken Run, The Help
 
 Scenario: all ratings selected
-  # see assignment
+  # see assignment -- dont name every movie
+  Given I am on the home page
+  #enter steps to check all ratings selected
+  When I check the following ratings: G, PG, PG-13, R, NC-17
+  #enter steps to submit the selection
+  And I press "Refresh" button
+  #enter step to validate all movies are listed
+  Then I should see all the movies
