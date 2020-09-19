@@ -20,6 +20,7 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.body is the entire content of the page as a string.
   #page.body.should =~/(.*)e1(.*)e2(.*)/
+  #use character classes to id strings that may exist in the page, whitespace and non-white space
   expect(/[\s\S]*#{e1}[\s\S]*#{e2}/).to match(page.body)
   #fail "Unimplemented"
 end
